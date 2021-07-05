@@ -1,4 +1,4 @@
-proairetika -->{}
+
 program                 :T_PROGRAM T_ID \n function_declaration program_body
                         |T_PROGRAM T_ID \n program_body
                         ;

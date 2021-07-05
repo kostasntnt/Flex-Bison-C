@@ -99,9 +99,10 @@ LINEFEED      \n
 "]"                 {TPRINT(T_RBRACK); return T_RBRACK;}
 "{"                 {TPRINT(T_LBRACE); return T_LBRACE;}
 "}"                 {TPRINT(T_RBRACE); return T_RBRACE;}
+":"                 {TPRINT(T_DDOT); return T_DDOT;}
 
 {WHITESPACE}        ;
-{LINEFEED}                  {yylineno++;}
+{LINEFEED}          {yylineno++;}
 \r\n                {  }
 
 

@@ -50,6 +50,9 @@ char *strval;
 
 %token <strval>    T_ID                 "id"
 %token <strval>    T_DIGIT              "digit"
+%token <strval>    T_NUM                "num"
+%token <strval>    T_SCONST             "string"
+%token <strval>    T_CHARACTER          "character" 
 
 // lexikoi telestes
 %token <strval>    T_LPAREN             "("
@@ -61,6 +64,7 @@ char *strval;
 %token <strval>    T_RBRACK             "]"
 %token <strval>    T_LBRACE             "{"
 %token <strval>    T_RBRACE             "}"
+%token <strval>    T_DDOT               ":"
 
 %token T_EOF       0                    "EOF"
 

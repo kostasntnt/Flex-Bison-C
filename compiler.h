@@ -38,7 +38,9 @@
 #define T_ID 70
 #define T_DIGIT 71
 #define T_NUM 72
-#define T_SCONST 73 //string
+#define T_SCONST 73 
+
+
 // lexikoi telestes
 #define T_LPAREN 31
 #define T_RPAREN 32
@@ -49,5 +51,6 @@
 #define T_RBRACK 37
 #define T_LBRACE 38
 #define T_RBRACE 39
+#define T_DDOT 40
 
 #define T_EOF 0

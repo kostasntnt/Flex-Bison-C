@@ -14,13 +14,13 @@ stmt                    :assign_stmt
                         |if_stmt
                         |switch_stmt
                         |break_stmt
-                        |slc_stmt
                         |print_stmt
                         ;
 
 assign_stmt             :T_ID T_ASSIGN T_NUM
                         |T_ID T_ASSIGN T_ID
                         |T_ID T_ASSIGN expression
+                        ;
 
 while_stmt              :T_WHILE expression T_ENDWHILE
                         ;
@@ -48,8 +48,6 @@ break_stmt              :T_BREAK T_SEMI
 print_stmt              :T_LPAREN STRING T_COMMA T_ID T_RPAREN T_SEMI
                         |T_LPAREN STRING T_RPAREN T_SEMI
                         ;
-
-slc_stmt                :
 
 function_declaration    :T_FUNCTION T_ID T_LPAREN parameter_list T_RPAREN \n function_body T_RETURN T_NUM T_END_FUNCTION
 

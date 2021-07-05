@@ -1,0 +1,63 @@
+proairetika -->{}
+program                 :PROGRAM T_ID \n function_declaration program_body
+                        |PROGRAM T_ID \n program_body
+                        ;
+
+program_body            :STARTMAIN variable_declaration stmt ENDMAIN
+                        |STARTMAIN stmt ENDMAIN
+                        |STARTMAIN ENDMAIN
+                        ;
+
+stmt                    :assign_stmt
+                        |while_stmt
+                        |for_stmt
+                        |if_stmt
+                        |switch
+                        |break
+                        |slc
+                        ;
+
+assign_stmt             :variable = expression [+,-,^,*,/]
+
+while_stmt              :
+
+for_stmt                :
+
+if_stmt                 :
+
+switch_stmt             :
+
+break_stmt              :
+
+slc_stmt                :
+
+function_declaration    :FUNCTION T_ID T_LPAREN parameter_list T_RPAREN \n function_body T_RETURN T_NUM END_FUNCTION
+
+function_body           :variable_declaration
+                        |%empty
+
+variable_declaration    :VARS data_type identifier_list ;
+
+identifier_list         :T_ID 
+                        |identifier_list T_COMMA T_ID
+                        ;
+
+parameter_list          :number
+                        |parameter_list T_COMMA number
+                        |number T_ASSIGN number
+                        ;
+
+expression              :data_type T_ID
+                        |expression T_ASSIGN number
+                        |expression T_COMMA T_ID
+                        |expression T_ASSIGN T_LBRACE parameter_list T_RBRACE
+                        ;
+
+number                  :DIGIT
+                        |CHARACTER
+                        ;
+
+data_type		        :T_INTEGER
+				        |T_CHAR
+				        ;
+

@@ -4,7 +4,7 @@
     #include <stdlib.h>    
     
     extern FILE *yyin;
-    
+    extern int yylex();    
 %}
 
 %union {
@@ -13,12 +13,14 @@ char *strval;
 }
 
 //keywords apo ekfwnhsh    termatikoi xarakthres
-%token <strval>    T_PROGRAM        "program start"
-%token <strval>    T_FUNCTION       "function"
-%token <strval>    T_VARS           "variables"
-%token <strval>    T_CHAR           "char"
-%token <intval>    T_INTEGER        "integer"
-%token <strval>    T_END_FUNCTION   "end function"
+// ta types mporei na vgoun (xreiazontai sth shmasiologikh analush)
+// isws xreiastei na pros8e8oun ari8moi sta tokens 
+%token <strval>    T_PROGRAM            "program start"
+%token <strval>    T_FUNCTION           "function"
+%token <strval>    T_VARS               "variables"
+%token <strval>    T_CHAR               "char"
+%token <intval>    T_INTEGER            "integer"
+%token <strval>    T_END_FUNCTION       "end function"
 %token <strval>    T_RETURN             "return"
 %token <strval>    T_STARTMAIN          "start main"
 %token <strval>    T_ENDMAIN            "end main"
@@ -60,12 +62,12 @@ char *strval;
 %token <strval>    T_LBRACE             "{"
 %token <strval>    T_RBRACE             "}"
 
-%token T_EOF       0                  "EOF"
+%token T_EOF       0                    "EOF"
 
 
 %%
 
-program: global_declaration
+main_header:  T_INTEGER T_STARTMAIN T_LPAREN T_RPAREN;
 
 %%
 

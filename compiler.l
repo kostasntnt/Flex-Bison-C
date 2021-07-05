@@ -25,7 +25,7 @@ ALPHANUM_     ({ALPHANUM}|_)
 NUMBER        [1-9][0-9]*|0
 IDENTIFIER    \_*{CHARACTER}{ALPHANUM}*(_{ALPHANUM}+)*_?
 WHITESPACE    [ \t]
-
+LINEFEED      \n 
 
 %%
                   /*yylval.strval = strdup(yytext)*/
@@ -100,8 +100,8 @@ WHITESPACE    [ \t]
 "{"                 {TPRINT(T_LBRACE); return T_LBRACE;}
 "}"                 {TPRINT(T_RBRACE); return T_RBRACE;}
 
-{WHITESPACE}        { }
-\n                  {yylineno;}
+{WHITESPACE}        ;
+{LINEFEED}                  {yylineno++;}
 \r\n                {  }
 
 

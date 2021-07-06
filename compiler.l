@@ -2,8 +2,8 @@
     
 #include <stdio.h>
 #include <stdlib.h>
-#include "compiler.h"
-
+//#include "compiler.h"
+#include "syntax.tab.h"
 char str_buf[256];
 
 void TPRINT(int token_id);
@@ -26,7 +26,7 @@ NUMBER        [1-9][0-9]*|0
 IDENTIFIER    \_*{CHARACTER}{ALPHANUM}*(_{ALPHANUM}+)*_?
 WHITESPACE    [ \t]
 LINEFEED      \n 
-
+STRINGS      \"(\\.|[^"])*\"
 %%
                   /*yylval.strval = strdup(yytext)*/
 "PROGRAM"           { TPRINT(T_PROGRAM); return T_PROGRAM; }
@@ -47,6 +47,7 @@ LINEFEED      \n
 "IF"                { TPRINT(T_IF); return T_IF;}
 "THEN"              { TPRINT(T_THEN); return T_THEN;}
 "ELSEIF"            { TPRINT(T_ELSEIF); return T_ELSEIF; }
+"ELSE"              { TPRINT(T_ELSE); return T_ELSE; }
 "ENDIF"             { TPRINT(T_ENDIF); return T_ENDIF; }
 "SWITCH"            { TPRINT(T_SWITCH); return T_SWITCH;}
 "CASE"              { TPRINT(T_CASE); return T_CASE; }
@@ -54,9 +55,9 @@ LINEFEED      \n
 "ENDSWITCH"         { TPRINT(T_ENDSWITCH); return T_ENDSWITCH; }
 "BREAK"             { TPRINT(T_BREAK); return T_BREAK; }
 
-{IDENTIFIER}        { TPRINT(T_ID); return T_ID;}
-{DIGIT}             { TPRINT(T_DIGIT); return T_DIGIT;}
-{NUMBER}            { TPRINT(T_NUM); return T_NUM;}
+{IDENTIFIER}        { TPRINT(T_ID); yylval.strval=strdup(yytext); return T_ID;}
+{DIGIT}             { TPRINT(T_DIGIT); yylval.strval=strdup(yytext); return T_DIGIT;}
+{NUMBER}            { TPRINT(T_NUM); yylval.strval=strdup(yytext); return T_NUM;}
 
 "%"                                 {printf("Comment Found\n");BEGIN(SINGLE_LINE_COMMENT);}
 <SINGLE_LINE_COMMENT>(\n|\r\n)      {BEGIN(INITIAL); printf("Comment ended\n");}
@@ -101,6 +102,7 @@ LINEFEED      \n
 "}"                 {TPRINT(T_RBRACE); return T_RBRACE;}
 ":"                 {TPRINT(T_DDOT); return T_DDOT;}
 
+{STRINGS}          {TPRINT(T_STRING); yylval.strval=strdup(yytext); return T_STRING;}
 {WHITESPACE}        ;
 {LINEFEED}          {yylineno++;}
 \r\n                {  }
@@ -111,25 +113,6 @@ LINEFEED      \n
 
 %%
 
-int main(int argc, char *argv[]){
-    int token;
-    if(argc >1){
-        yyin=fopen(argv[1], "r");
-        if (yyin == NULL){
-            perror ("Error opening file");
-            return -1;
-        }
-    }
-
-    do{
-        token =yylex();
-    }
-    while(token!=0);
-    fclose(yyin);
-    yyterminate();
-
-
-}
 
 void TPRINT(int token_id){
     printf("TOKEN FOUND : %s | TOKEN NUMBER: %d |LINE: %d\n", yytext, token_id, yylineno);

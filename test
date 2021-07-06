@@ -1,16 +1,10 @@
-PROGRAM  main(){
-    fasd
-    "  "  
-    "asdasda"
-"Hi \n vas"
-"Hello my name is \
-bill and this"
-}
-IF(x==5) {
-    int my_var =3;
-}
-FUNCTION
-13 asd
-giwrgos 45
-%
-asdasd
+PROGRAM programma1 
+FUNCTION function1(2,3)
+VARS INTEGER int1;
+RETURN 0
+END_FUNCTION
+
+STARTMAIN 
+
+
+ENDMAIN

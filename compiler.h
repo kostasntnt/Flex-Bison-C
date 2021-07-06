@@ -18,6 +18,7 @@
 #define T_IF 16
 #define T_THEN 17
 #define T_ELSEIF 18
+#define T_ELSE 42
 #define T_ENDIF 19
 #define T_SWITCH 20
 #define T_CASE 21
@@ -39,6 +40,7 @@
 #define T_DIGIT 71
 #define T_NUM 72
 #define T_SCONST 73 
+#define T_STRING 74
 
 
 // lexikoi telestes
